@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddDefaultValuesToSuspendedAndDeleted extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('websites', function (Blueprint $table) {
+            $table->integer('is_suspended')->default(0)->change();
+            $table->integer('is_deleted')->default(0)->change();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('websites', function (Blueprint $table) {
+            $table->integer('is_suspended')->default(NULL)->change();
+            $table->integer('is_deleted')->default(NULL)->change();
+        });
+    }
+}
